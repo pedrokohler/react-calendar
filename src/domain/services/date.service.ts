@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import { Weekdays } from '../enums/weekdays.enum';
+import { IMonthMatrix } from '../interfaces/month-matrix.interface';
 
 const DAYS_IN_A_WEEK = 7;
 
@@ -35,7 +36,7 @@ export const getNumberOfMonthMatrixRows = (year: number, month: number) => {
 
   if(lastDay === MAX_NUMBER_OF_DAYS_IN_A_MONTH) {
     if(firstWeekdayOfMonth >= Weekdays.FRIDAY) {
-    return MAX_NUMBER_OF_WEEK_ROWS;
+      return MAX_NUMBER_OF_WEEK_ROWS;
     }
     return MAX_NUMBER_OF_WEEK_ROWS - 1;
   }
@@ -77,4 +78,13 @@ export const getMonthMatrixRow = (firstDayOfMonthIndex: number, lastDayOfMonth: 
   }
 
   return getNthMonthMatrixRow(lastDayOfMonth, currentRow, lastDayOf0thRow);
+}
+
+export const getMonthMatrix = (year: number, month: number): IMonthMatrix => {
+  const lastDayOfMonth = getLastDayOfMonth(year, month);
+  const numberOfMonthMatrixRows = getNumberOfMonthMatrixRows(year, month);
+  const firstDayOfMonth = getWeekdayOfFirstDayOfMonth(year, month);
+  const firstDayOfMonthIndex = firstDayOfMonth % Weekdays.SUNDAY;
+
+  return getNullArray(numberOfMonthMatrixRows).map((_, i) => getMonthMatrixRow(firstDayOfMonthIndex, lastDayOfMonth, i));
 }
