@@ -1,14 +1,14 @@
 import { Weekdays } from "../../enums/weekdays.enum"
-import { getLastDayOfMonth, getWeekdayOfFirstDayOfMonth } from "../date.service"
+import { getLastDayOfMonth, getNumberOfWeekRows, getWeekdayOfFirstDayOfMonth } from "../date.service"
 
 describe("DATE TIME SERVICE", () => {
   describe("GET LAST DAY OF MONTH", () => {
     it("Should return the last day of the month", () => {
-      expect(getLastDayOfMonth(2021, 2)).toBe(28)
+      expect(getLastDayOfMonth(2021, 2)).toBe(28);
     })
 
     it("Should return the last day of the month of a leap year", () => {
-      expect(getLastDayOfMonth(2020, 2)).toBe(29)
+      expect(getLastDayOfMonth(2020, 2)).toBe(29);
     })
   })
 
@@ -23,6 +23,15 @@ describe("DATE TIME SERVICE", () => {
       expect(getWeekdayOfFirstDayOfMonth(2021, 8)).toBe(Weekdays.SUNDAY);
     })
   })
+
+  describe("GET NUMBER OF WEEKS ROWS OF MONTH", () => {
+    it("Should get the number of weeks rows when the month should have 5 week rows", () => {
+      expect(getNumberOfWeekRows(2021, 11)).toBe(5);
+      expect(getNumberOfWeekRows(2021, 12)).toBe(5);
     })
+
+    it("Should get the number of weeks when the month should have 4 week rows", () => {
+      expect(getNumberOfWeekRows(2015, 2)).toBe(4);
+  })
   })
 })
