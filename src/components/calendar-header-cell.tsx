@@ -4,13 +4,13 @@ import styled from 'styled-components';
 const Block = styled.div`
   background-color: ${(props) => props.className === "active" ? "white" : "#A9A9A9"};
   min-width: calc(100% / 7);
-  min-height: 100px;
+  min-height: 20px;
   border: solid 1px;
   text-align: center;
-  line-height: 100px;
+  line-height: 20px;
 `
 
-function CalendarDay({ children }: React.PropsWithChildren<React.ReactNode>) {
+function CalendarHeaderCell({ children }: React.PropsWithChildren<React.ReactNode>) {
 
   if(children === null){
     return <Block>&nbsp;</Block>
@@ -21,4 +21,4 @@ function CalendarDay({ children }: React.PropsWithChildren<React.ReactNode>) {
   );
 }
 
-export default CalendarDay;
+export default CalendarHeaderCell;
