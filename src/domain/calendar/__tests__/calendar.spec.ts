@@ -1,7 +1,7 @@
-import { Weekdays } from "../../enums/weekdays.enum"
-import { getLastDayOfMonth, getMonthMatrix, getMonthMatrixRow, getNumberOfMonthMatrixRows, getWeekdayOfFirstDayOfMonth } from "../date.service"
+import { Weekdays } from "../enums/weekdays.enum"
+import { getLastDayOfMonth, getMonthMatrix, getMonthMatrixRow, getNumberOfMonthMatrixRows, getWeekdayOfFirstDayOfMonth } from "../models/calendar.model"
 
-describe("DATE TIME SERVICE", () => {
+describe("CALENDAR", () => {
   describe("GET LAST DAY OF MONTH", () => {
     it("Should return the last day of the month", () => {
       expect(getLastDayOfMonth(2021, 2)).toBe(28);

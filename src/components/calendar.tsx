@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import CalendarDay from './calendar-day';
 import CalendarRow from './calendar-row';
-import { getMonthMatrix } from '../domain/services/date.service';
+import { getMonthMatrix } from '../domain/calendar';
 import styled from 'styled-components';
 import CalendarHeaderCell from './calendar-header-cell';
 

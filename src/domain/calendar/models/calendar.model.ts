@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon';
+import { getNullArray, getSequenceArray } from '../../../lib';
 import { Weekdays } from '../enums/weekdays.enum';
 import { IMonthMatrix } from '../interfaces/month-matrix.interface';
 
@@ -51,8 +52,6 @@ export const getNumberOfMonthMatrixRows = (year: number, month: number) => {
   return MAX_NUMBER_OF_WEEK_ROWS - 1;
 }
 
-const getNullArray = (size: number) => new Array(size).fill(null);
-const getSequenceArray = (size: number, base: number) => new Array(size).fill(null).map((_, i) => i + base);
 
 const get0thMonthMatrixRow = (firstDayOfMonthIndex: number, lastDayOf0thRow: number) => {
   return [...getNullArray(firstDayOfMonthIndex), ...getSequenceArray(lastDayOf0thRow, 1)]
@@ -63,9 +62,8 @@ const isLessThanAWeek = (days: number) => days <= DAYS_IN_A_WEEK;
 const getNthMonthMatrixRow = (lastDayOfMonth: number, currentRow: number, lastDayOf0thRow: number) => {
   const firstDayOfRow = (currentRow - 1) * DAYS_IN_A_WEEK + lastDayOf0thRow + 1;
   const remainingMonthDays = lastDayOfMonth - firstDayOfRow + 1;
-  const hasLessRemainingDaysThanAWeek = isLessThanAWeek(remainingMonthDays);
-  const filledSpots =  hasLessRemainingDaysThanAWeek ? remainingMonthDays : DAYS_IN_A_WEEK;
-  const nullSpots = hasLessRemainingDaysThanAWeek ? DAYS_IN_A_WEEK - remainingMonthDays : 0;
+  const filledSpots =  isLessThanAWeek(remainingMonthDays) ? remainingMonthDays : DAYS_IN_A_WEEK;
+  const nullSpots = isLessThanAWeek(remainingMonthDays) ? DAYS_IN_A_WEEK - remainingMonthDays : 0;
 
   return [...getSequenceArray(filledSpots, firstDayOfRow), ...getNullArray(nullSpots)];
 }
