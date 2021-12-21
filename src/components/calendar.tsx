@@ -6,12 +6,18 @@ import styled from 'styled-components';
 import CalendarHeaderCell from './calendar-header-cell';
 
 const Container = styled.div`
-  padding: 50px;
+  margin: 2%;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
 `
 
 function Calendar() {
 
-  const displayCalendarHeader = useCallback(() => {
+  const displayCalendarHeaders = useCallback(() => {
     return (
       <CalendarRow>
         {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(dayName => (
@@ -32,7 +38,7 @@ function Calendar() {
 
   return (
     <Container>
-      {displayCalendarHeader()}
+      {displayCalendarHeaders()}
       {displayCalendarDays()}
     </Container>
   );

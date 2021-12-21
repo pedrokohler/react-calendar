@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Block = styled.div`
+  box-sizing: border-box;
   background-color: ${(props) => props.className === "active" ? "white" : "#A9A9A9"};
   min-width: calc(100% / 7);
   min-height: 100px;
