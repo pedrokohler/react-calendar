@@ -1,19 +1,9 @@
 import React, { useCallback } from 'react';
-import CalendarDay from './calendar-day';
-import CalendarRow from './calendar-row';
-import { getMonthMatrix } from '../domain/calendar';
-import styled from 'styled-components';
-import CalendarHeaderCell from './calendar-header-cell';
-
-const Container = styled.div`
-  margin: 2%;
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-`
+import CalendarDay from '../calendar-day';
+import CalendarRow from '../calendar-row';
+import { getMonthMatrix } from '../../domain/calendar';
+import CalendarHeaderCell from '../calendar-header-cell';
+import { Container } from './styled-components';
 
 function Calendar() {
 
