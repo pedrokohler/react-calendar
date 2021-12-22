@@ -1,10 +1,13 @@
 import { DateTime } from 'luxon';
-import { CalendarActions } from "./actions"
-import { IAction } from "../../../lib"
+import { CalendarActions } from "./actions";
+import { IAction } from "../../../lib";
+
+const formatMask = 'LLLL yyyy';
 
 const initialState = {
   year: DateTime.local().year,
   month: DateTime.local().month,
+  monthName: DateTime.local().toFormat(formatMask),
 }
 
 export function calendarReducer(state = initialState, action: IAction) {
@@ -17,6 +20,7 @@ export function calendarReducer(state = initialState, action: IAction) {
         ...state,
         year: newDate.year,
         month: newDate.month,
+        monthName: newDate.toFormat(formatMask)
       }
     }
     case CalendarActions.GO_BACKWARDS: {
@@ -27,6 +31,7 @@ export function calendarReducer(state = initialState, action: IAction) {
         ...state,
         year: newDate.year,
         month: newDate.month,
+        monthName: newDate.toFormat(formatMask)
       }
     }
     default:
