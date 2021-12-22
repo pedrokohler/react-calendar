@@ -35,6 +35,16 @@ function ReminderModal({
     [dispatch, onClose, reminder]
   );
 
+  const onDelete = useCallback(
+    () => {
+      if(reminder) {
+        dispatch({ type: RemindersActions.DELETE, payload: reminder });
+        onClose();
+      }
+    },
+    [dispatch, onClose, reminder]
+  );
+
   if (isHidden) {
     return <Fragment></Fragment>;
   }
@@ -42,6 +52,7 @@ function ReminderModal({
   return (
     <Container>
       <ReminderForm onSubmit={onSubmit} reminder={reminder}></ReminderForm>
+      {reminder && <button onClick={() => onDelete()}>Delete</button>}
       <button onClick={() => onClose()}>Close</button>
     </Container>
   );

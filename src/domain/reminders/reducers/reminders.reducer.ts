@@ -1,6 +1,6 @@
 import { RemindersActions } from "./actions";
 import { IAction } from "../../../lib";
-import { addReminder, updateReminder } from "..";
+import { addReminder, deleteReminder, updateReminder } from "..";
 import { IReminders } from "../interfaces";
 import { DateTime } from "luxon";
 
@@ -44,6 +44,17 @@ export function remindersReducer(state = initialState, action: IAction) {
           time: convertedTime,
         },
         id: oldReminder.id,
+      });
+    }
+    case RemindersActions.DELETE: {
+      const { time, id } = action.payload;
+      const { year, month, day } = time;
+      return deleteReminder({
+        reminders: state,
+        year,
+        month,
+        day,
+        id,
       });
     }
     default:
