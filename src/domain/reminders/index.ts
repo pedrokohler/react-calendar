@@ -1,3 +1,3 @@
-export * from './models/reminder.model';
+export * from './utilities/reminder.utilities';
 export * from './reducers';
 export * from './interfaces';

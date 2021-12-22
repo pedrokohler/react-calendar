@@ -1,4 +1,4 @@
-import { addReminder, deleteReminder, updateReminder } from "../models/reminder.model";
+import { addReminder, deleteReminder, updateReminder } from "../utilities/reminder.utilities";
 import { DateTime } from "luxon";
 
 const now = DateTime.local();

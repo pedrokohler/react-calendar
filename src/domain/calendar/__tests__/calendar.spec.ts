@@ -1,5 +1,5 @@
 import { Weekdays } from "../enums/weekdays.enum"
-import { getLastDayOfMonth, getMonthMatrix, getMonthMatrixRow, getNumberOfMonthMatrixRows, getWeekdayOfFirstDayOfMonth } from "../models/calendar.model"
+import { getLastDayOfMonth, getMonthMatrix, getMonthMatrixRow, getNumberOfMonthMatrixRows, getWeekdayOfFirstDayOfMonth } from "../utilities/calendar.utilities"
 
 describe("CALENDAR", () => {
   describe("GET LAST DAY OF MONTH", () => {
