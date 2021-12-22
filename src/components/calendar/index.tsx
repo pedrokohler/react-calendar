@@ -7,7 +7,13 @@ import {
   WeekdaysNames,
 } from "../../domain/calendar";
 import CalendarHeaderCell from "../calendar-header-cell";
-import { Container } from "./styled-components";
+import {
+  HeaderContainer,
+  Container,
+  NavigationButtonsContainer,
+  Title,
+  Button,
+} from "./styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app";
 import ReminderModal from "../reminder-modal";
@@ -15,8 +21,9 @@ import { IReminder } from "../../domain/reminders";
 
 function Calendar() {
   const [isModalHidden, setIsModalHidden] = useState(true);
-  const [reminderBeingEdited, setReminderBeingEdited] =
-    useState<IReminder | undefined>(undefined);
+  const [reminderBeingEdited, setReminderBeingEdited] = useState<
+    IReminder | undefined
+  >(undefined);
   const { year, month, monthName } = useSelector(
     (state: RootState) => state.calendar
   );
@@ -84,20 +91,28 @@ function Calendar() {
 
   return (
     <Container>
-      <div>
-        <h1>{monthName}</h1>
-        <button
-          onClick={() => dispatch({ type: CalendarActions.GO_BACKWARDS })}
-        >
-          Previous Month
-        </button>
-        <button onClick={() => dispatch({ type: CalendarActions.GO_FORWARD })}>
-          Next Month
-        </button>
-      </div>
-      <div>
-        <button onClick={openReminderCreationModal}>Create Reminder</button>
-      </div>
+      <HeaderContainer>
+        <Title>{monthName}</Title>
+        <NavigationButtonsContainer>
+          <Button
+            purpose="secondary"
+            onClick={() => dispatch({ type: CalendarActions.GO_BACKWARDS })}
+          >
+            Previous Month
+          </Button>
+          <Button
+            purpose="secondary"
+            onClick={() => dispatch({ type: CalendarActions.GO_FORWARD })}
+          >
+            Next Month
+          </Button>
+        </NavigationButtonsContainer>
+        <div>
+          <Button purpose="primary" onClick={openReminderCreationModal}>
+            Create Reminder
+          </Button>
+        </div>
+      </HeaderContainer>
       {displayCalendarHeaders()}
       {displayCalendarDays(year, month)}
       <ReminderModal

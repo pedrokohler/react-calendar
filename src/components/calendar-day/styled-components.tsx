@@ -5,10 +5,10 @@ export const Block = styled.div`
   background-color: ${(props) =>
     props.className === "active" ? "white" : "#A9A9A9"};
   min-width: calc(100% / 7);
-  min-height: 100px;
+  min-height: 80px;
   border: solid 1px;
   text-align: center;
-  line-height: 100px;
+  line-height: 80px;
 
   @media only screen and (max-width: 600px) {
     width: 100%;

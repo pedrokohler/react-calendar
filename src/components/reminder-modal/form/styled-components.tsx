@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { purposeColorSelector } from '../../../lib/';
 
 export const Container = styled.div`
   box-sizing: border-box;
@@ -19,20 +20,6 @@ export const SubmitButton = styled.input`
   height: 30px;
   border: none;
 
-  background-color: ${({ purpose }: { purpose?: string }) => {
-    switch(purpose){
-      case "danger": {
-        return "#dc3545";
-      }
-      case "secondary": {
-        return "#6c757d";
-      }
-      case "primary": {
-        return "#007bff";
-      }
-      default:
-        return "unset"
-    }
-  }};
+  background-color: ${purposeColorSelector};
   color: white;
 `;
