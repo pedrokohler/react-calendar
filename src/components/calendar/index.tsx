@@ -15,7 +15,7 @@ function Calendar() {
     return (
       <CalendarRow>
         {Object.values(WeekdaysNames).map(dayName => (
-          <CalendarHeaderCell>{dayName}</CalendarHeaderCell>
+          <CalendarHeaderCell key={dayName}>{dayName}</CalendarHeaderCell>
         ))}
       </CalendarRow>)
   }, [])
@@ -23,8 +23,8 @@ function Calendar() {
 
   const displayCalendarDays = useCallback((year, month) => {
     return getMonthMatrix(year, month).map((row) => {
-      return <CalendarRow>
-        {row.map(day => (<CalendarDay>{day}</CalendarDay>))}
+      return <CalendarRow key={`${row}`}>
+        {row.map((day, i) => (<CalendarDay key={`${day}-${i}`}>{day}</CalendarDay>))}
       </CalendarRow>
     })
   }, []);
@@ -34,8 +34,8 @@ function Calendar() {
     <Container>
       <h1>{year} {month}</h1>
       <div>
-        <button onClick={() => dispatch({ type: CalendarActions.GO_FORWARD })}>Avançar</button>
         <button onClick={() => dispatch({ type: CalendarActions.GO_BACKWARDS })}>Retroceder</button>
+        <button onClick={() => dispatch({ type: CalendarActions.GO_FORWARD })}>Avançar</button>
       </div>
       {displayCalendarHeaders()}
       {displayCalendarDays(year, month)}
