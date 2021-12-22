@@ -29,9 +29,9 @@ function ReminderForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
         defaultValue={reminder?.description || "Enter description"}
-        {...register("description", { required: true })}
+        {...register("description", { required: true, maxLength: 30 })}
       />
-      {errors.description && <span>This field is required</span>}
+      {errors.description && <span>{errors.description.message}</span>}
 
       <Controller
         name="color"
