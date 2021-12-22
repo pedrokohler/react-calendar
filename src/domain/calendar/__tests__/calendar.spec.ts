@@ -33,6 +33,7 @@ describe("CALENDAR", () => {
     it("Should get the number of month matrix rows when the month should have 5 rows", () => {
       expect(getNumberOfMonthMatrixRows(2021, 11)).toBe(5);
       expect(getNumberOfMonthMatrixRows(2021, 12)).toBe(5);
+      expect(getNumberOfMonthMatrixRows(2021, 8)).toBe(5);
     })
 
     it("Should get the number of month matrix rows when the month should have 4 rows", () => {
@@ -80,6 +81,14 @@ describe("CALENDAR", () => {
         [12, 13, 14, 15, 16, 17, 18],
         [19, 20, 21, 22, 23, 24, 25],
         [26, 27, 28, 29, 30, 31, null]
+      ]);
+
+      expect(getMonthMatrix(2021, 8)).toEqual([
+        [1, 2, 3, 4, 5, 6, 7],
+        [8, 9, 10, 11, 12, 13, 14],
+        [15, 16, 17, 18, 19, 20, 21],
+        [22, 23, 24, 25, 26, 27, 28],
+        [29, 30, 31, null, null, null, null]
       ]);
     })
   })
