@@ -1,10 +1,10 @@
 import { RemindersActions } from "./actions";
 import { IAction } from "../../../lib";
-import { addReminder } from "..";
+import { addReminder, updateReminder } from "..";
 import { IReminders } from "../interfaces";
 import { DateTime } from "luxon";
 
-const initialState: IReminders= {}
+const initialState: IReminders = {};
 
 export function remindersReducer(state = initialState, action: IAction) {
   switch (action.type) {
@@ -22,7 +22,31 @@ export function remindersReducer(state = initialState, action: IAction) {
         },
       });
     }
+    case RemindersActions.UPDATE: {
+      const { newReminder, oldReminder } = action.payload;
+      const convertedTime = DateTime.fromJSDate(newReminder.time);
+      const { year, month, day } = convertedTime;
+      const { year: oldYear, month: oldMonth, day: oldDay } = oldReminder.time;
+      return updateReminder({
+        reminders: state,
+        newDate: {
+          year,
+          month,
+          day,
+        },
+        oldDate: {
+          year: oldYear,
+          month: oldMonth,
+          day: oldDay,
+        },
+        updatedReminder: {
+          ...newReminder,
+          time: convertedTime,
+        },
+        id: oldReminder.id,
+      });
+    }
     default:
-      return state
+      return state;
   }
 }

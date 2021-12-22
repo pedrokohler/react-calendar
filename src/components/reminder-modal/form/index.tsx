@@ -28,14 +28,14 @@ function ReminderForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        defaultValue="Enter description"
+        defaultValue={reminder?.description || "Enter description"}
         {...register("description", { required: true })}
       />
       {errors.description && <span>This field is required</span>}
 
       <Controller
         name="color"
-        defaultValue="#808080"
+        defaultValue={reminder?.color || "#808080"}
         control={control}
         render={({ field: { onChange, value } }) => (
           <HexColorPicker color={value} onChange={onChange} />
@@ -44,7 +44,7 @@ function ReminderForm({
 
       <Controller
         name="time"
-        defaultValue={new Date()}
+        defaultValue={reminder?.time.toJSDate() || new Date()}
         control={control}
         render={({ field: { onChange, value } }) => {
           return (
