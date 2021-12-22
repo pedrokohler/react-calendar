@@ -4,6 +4,7 @@ import { HexColorPicker } from "react-colorful";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { IReminder } from "../../../domain/reminders/interfaces";
+import { Container, SubmitButton } from "./styled-components";
 
 export interface FormInputs {
   description: string;
@@ -27,33 +28,63 @@ function ReminderForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        defaultValue={reminder?.description || "Enter description"}
-        {...register("description", { required: true, maxLength: 30 })}
-      />
-      {errors.description && <span>{errors.description.message}</span>}
+      <Container>
+        <div>
+          <div>Description</div>
+          <input
+            defaultValue={reminder?.description || ""}
+            {...register("description", {
+              required: { value: true, message: "Description is required" },
+              maxLength: {
+                value: 30,
+                message: "Description must be 30 characters max",
+              },
+            })}
+          />
+          {errors.description && <div>{errors.description.message}</div>}
+        </div>
 
-      <Controller
-        name="color"
-        defaultValue={reminder?.color || "#808080"}
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <HexColorPicker color={value} onChange={onChange} />
-        )}
-      />
+        <div>
+          <div>Time</div>
+          <Controller
+            name="time"
+            rules={{
+              required: {
+                value: true,
+                message: "Time is required",
+              },
+            }}
+            defaultValue={reminder?.time.toJSDate() || new Date()}
+            control={control}
+            render={({ field: { onChange, value } }) => {
+              return (
+                <div>
+                  <DatePicker
+                    selected={value}
+                    showTimeSelect
+                    onChange={onChange}
+                  />
+                  {errors.time && <div>{errors.time.message}</div>}
+                </div>
+              );
+            }}
+          />
+        </div>
 
-      <Controller
-        name="time"
-        defaultValue={reminder?.time.toJSDate() || new Date()}
-        control={control}
-        render={({ field: { onChange, value } }) => {
-          return (
-            <DatePicker selected={value} showTimeSelect onChange={onChange} />
-          );
-        }}
-      />
-
-      <input type="submit" />
+        <div>
+          <div>Color</div>
+          <Controller
+            name="color"
+            rules={{ required: true }}
+            defaultValue={reminder?.color || "#da2b2b"}
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <HexColorPicker color={value} onChange={onChange} />
+            )}
+          />
+        </div>
+      </Container>
+      <SubmitButton purpose="primary" type="submit" value="Save" />
     </form>
   );
 }

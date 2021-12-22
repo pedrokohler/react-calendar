@@ -3,7 +3,7 @@ import { SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { IReminder, RemindersActions } from "../../domain/reminders";
 import ReminderForm, { FormInputs } from "./form";
-import { Container } from "./styled-components";
+import { ButtonContainer, Container, Button } from "./styled-components";
 
 function ReminderModal({
   isHidden,
@@ -51,9 +51,11 @@ function ReminderModal({
 
   return (
     <Container>
+      <ButtonContainer>
+        {reminder && <Button purpose="danger" onClick={() => onDelete()}>Delete</Button>}
+        <Button purpose="secondary" onClick={() => onClose()}>Close</Button>
+      </ButtonContainer>
       <ReminderForm onSubmit={onSubmit} reminder={reminder}></ReminderForm>
-      {reminder && <button onClick={() => onDelete()}>Delete</button>}
-      <button onClick={() => onClose()}>Close</button>
     </Container>
   );
 }
