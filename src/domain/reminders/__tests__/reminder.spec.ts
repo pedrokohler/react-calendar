@@ -234,7 +234,7 @@ describe("REMINDERS", () => {
                 id: "foo",
                 description: "I'll not be modified",
                 color: "gold",
-                time: now,
+                time: now.set({ year: 2021, month: 12, day: 21 }),
               }
             ]
           }

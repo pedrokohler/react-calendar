@@ -1,11 +1,15 @@
 import React, { useCallback } from 'react';
 import CalendarDay from '../calendar-day';
 import CalendarRow from '../calendar-row';
-import { getMonthMatrix, WeekdaysNames } from '../../domain/calendar';
+import { CalendarActions, getMonthMatrix, WeekdaysNames } from '../../domain/calendar';
 import CalendarHeaderCell from '../calendar-header-cell';
 import { Container } from './styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../app';
 
 function Calendar() {
+  const { year, month } = useSelector((state: RootState) => state.calendar);
+  const dispatch = useDispatch();
 
   const displayCalendarHeaders = useCallback(() => {
     return (
@@ -17,8 +21,8 @@ function Calendar() {
   }, [])
 
 
-  const displayCalendarDays = useCallback(() => {
-    return getMonthMatrix(2021, 12).map((row) => {
+  const displayCalendarDays = useCallback((year, month) => {
+    return getMonthMatrix(year, month).map((row) => {
       return <CalendarRow>
         {row.map(day => (<CalendarDay>{day}</CalendarDay>))}
       </CalendarRow>
@@ -28,8 +32,13 @@ function Calendar() {
 
   return (
     <Container>
+      <h1>{year} {month}</h1>
+      <div>
+        <button onClick={() => dispatch({ type: CalendarActions.GO_FORWARD })}>Avançar</button>
+        <button onClick={() => dispatch({ type: CalendarActions.GO_BACKWARDS })}>Retroceder</button>
+      </div>
       {displayCalendarHeaders()}
-      {displayCalendarDays()}
+      {displayCalendarDays(year, month)}
     </Container>
   );
 }

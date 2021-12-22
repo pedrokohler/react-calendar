@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { v4 as randomUUID } from "uuid";
 import { IAddReminderParams, IDeleteReminderParams, IReminder, IUpdateReminderParams } from "../interfaces";
 
 const compareReminderTimes = (a: IReminder, b: IReminder): number => {
