@@ -29,15 +29,19 @@ export const addReminder = ({
     id: randomUUID(),
   };
 
-  const sameDayReminders = reminders[year]?.[month]?.[day] ?? [];
-  const sortedReminders = [...sameDayReminders, adaptedNewReminder].sort(
+  const sameYearReminders = reminders[year] ?? [];
+  const sameMonthReminders = sameYearReminders[month] ?? [];
+  const sameDayReminders = sameMonthReminders[day] ?? [];
+  const sortedDayReminders = [...sameDayReminders, adaptedNewReminder].sort(
     compareReminderTimes
   );
   return {
     ...reminders,
     [year]: {
+      ...sameYearReminders,
       [month]: {
-        [day]: sortedReminders,
+        ...sameMonthReminders,
+        [day]: sortedDayReminders,
       },
     },
   };
@@ -50,11 +54,15 @@ export const deleteReminder = ({
   day,
   id,
 }: IDeleteReminderParams) => {
-  const sameDayReminders = reminders[year]?.[month]?.[day] ?? [];
+  const sameYearReminders = reminders[year] ?? [];
+  const sameMonthReminders = sameYearReminders[month] ?? [];
+  const sameDayReminders = sameMonthReminders[day] ?? [];
   return {
     ...reminders,
     [year]: {
+      ...sameYearReminders,
       [month]: {
+        ...sameMonthReminders,
         [day]: sameDayReminders.filter((reminder) => reminder.id !== id),
       },
     },
