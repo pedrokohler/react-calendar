@@ -1,8 +1,8 @@
 import React, { Fragment, useCallback } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { IReminder, RemindersActions } from "../../../domain/reminders";
-import ReminderForm, { FormInputs } from "../form";
+import { IReminder, RemindersActions } from "../../domain/reminders";
+import ReminderForm, { FormInputs } from "./form";
 import { Container } from "./styled-components";
 
 function ReminderModal({

@@ -23,7 +23,6 @@ export const Reminder = styled.div`
   font-size: 0.9em;
   background-color: ${({ backgroundColor }: { backgroundColor: string }) =>
     backgroundColor};
-  height: 25px;
 `;
 
 export const Button = styled.button`

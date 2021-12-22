@@ -21,7 +21,7 @@ function CalendarDay({
       {reminders.map(reminder => {
         const hour = reminder.time.toFormat("HH:mm");
         return (
-          <Reminder backgroundColor={reminder.color}>
+          <Reminder backgroundColor={reminder.color} key={reminder.id}>
             <Button onClick={() => onClick(reminder)}>
               {hour} - {reminder.description}
             </Button>

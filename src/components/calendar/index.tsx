@@ -10,7 +10,7 @@ import CalendarHeaderCell from "../calendar-header-cell";
 import { Container } from "./styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app";
-import ReminderModal from "../reminder-modal/create-reminder-modal";
+import ReminderModal from "../reminder-modal";
 import { IReminder } from "../../domain/reminders";
 
 function Calendar() {
