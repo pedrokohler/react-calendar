@@ -8,4 +8,8 @@ export const Block = styled.div`
   border: solid 1px;
   text-align: center;
   line-height: 20px;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `

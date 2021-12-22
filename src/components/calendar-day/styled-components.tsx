@@ -9,6 +9,12 @@ export const Block = styled.div`
   border: solid 1px;
   text-align: center;
   line-height: 100px;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    display: ${(props) =>
+      props.className === "active" ? "block" : "none"}
+  }
 `;
 
 export const Reminder = styled.div`
